@@ -10,14 +10,18 @@
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Tailwind CSS -->
+    <!-- Hoja de Estilos Personalizada (Externo) -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Configuración de Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -31,252 +35,210 @@
                             dark: '#2F343F',
                             black: '#000000',
                             white: '#FFFFFF',
-                            gray: '#f3f4f6'
+                            gray: '#f8f9fa',
+                            lightgold: '#FFF8E1'
                         }
                     },
                     boxShadow: {
-                        'card': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                        'card-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                        'soft': '0 20px 40px -15px rgba(0, 0, 0, 0.1)',
+                        'glow': '0 0 20px rgba(230, 182, 31, 0.3)',
                     },
                     animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
                     }
                 }
             }
         }
     </script>
-
-    <style>
-        html { scroll-behavior: smooth; }
-        
-        body { 
-            overflow-x: hidden; 
-            background-color: #f9fafb;
-        }
-
-        /* Scrollbar personalizada */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #2F343F; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #E6B61F; }
-
-        /* Animaciones */
-        .modal {
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease-in-out;
-            z-index: 1000;
-        }
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            transform: scale(0.95);
-            transition: transform 0.3s ease-in-out;
-        }
-        .modal.active .modal-content {
-            transform: scale(1);
-        }
-    </style>
 </head>
-<body class="bg-gray-50 text-uca-dark antialiased selection:bg-uca-gold selection:text-white pb-10 flex flex-col min-h-screen">
+<body class="text-gray-700 antialiased selection:bg-uca-gold selection:text-uca-dark flex flex-col min-h-screen">
 
     <!-- Navbar -->
-    <nav class="bg-white shadow-sm sticky top-0 z-40">
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-center h-20 items-center">
-                <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1764782384/base_transparente_vnkesb.svg" alt="Círculos de Estudio Logo" class="h-14 w-auto hover:scale-105 transition-transform duration-300">
+                <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1764782384/base_transparente_vnkesb.svg" alt="Círculos de Estudio Logo" class="h-12 w-auto hover:scale-105 transition-transform duration-300 cursor-pointer" onclick="window.scrollTo(0,0)">
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section (Rediseñado: Imagen Abajo) -->
-    <header class="relative bg-white overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-24">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <!-- Hero Section -->
+    <header class="relative bg-white pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-uca-gold/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm mb-8 animate-float">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span class="text-xs font-bold tracking-wide text-uca-dark uppercase">Un programa Oficial UCA</span>
+            </div>
             
-            <span class="inline-block py-1 px-3 rounded-full bg-uca-gold/10 text-uca-dark text-sm font-bold mb-6 tracking-wide border border-uca-gold/20">
-                PROGRAMA OFICIAL UCA
-            </span>
-            
-            <h1 class="text-4xl tracking-tight font-extrabold text-uca-dark sm:text-5xl md:text-6xl mb-6">
-                Te ayudamos con <span class="text-uca-gold inline-block transform hover:scale-105 transition-transform duration-300">tus calificaciones</span>
+            <h1 class="text-5xl lg:text-7xl font-black text-uca-dark mb-6 leading-tight">
+                Te ayudamos con <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-uca-gold to-yellow-600 relative">
+                    tus calificaciones
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-uca-gold opacity-40" viewBox="0 0 200 9" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2.00025 5.50002C35.5002 8.00002 160.5 8.00002 198 2.00002" stroke-width="3" stroke-linecap="round"/></svg>
+                </span>
             </h1>
             
-            <p class="mt-4 text-xl text-gray-500 max-w-2xl mx-auto font-medium leading-relaxed">
-                Más de 14 años de experiencia mejorando el rendimiento académico y facilitando tus horas sociales.
+            <p class="mt-6 text-xl text-gray-500 max-w-2xl mx-auto font-medium readable-text">
+                Por más de 14 años hemos ayudado a los estudiantes a mejorar sus calificaciones en un entorno ligero y perfecto para hacer amigos
             </p>
 
-            <div class="mt-8 flex justify-center gap-4">
-                <a href="#cards-section" class="px-8 py-3 border border-transparent text-base font-bold rounded-full text-white bg-uca-dark hover:bg-black md:py-4 md:text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    Comenzar ahora
+            <div class="mt-10 flex justify-center">
+                <a href="#cards-section" class="group relative px-8 py-4 bg-uca-dark text-white font-bold rounded-full shadow-lg hover:shadow-glow hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                    <span class="relative z-10 flex items-center gap-2">
+                        Comenzar ahora <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
+                    </span>
+                    <div class="absolute inset-0 bg-uca-gold transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                 </a>
             </div>
 
-            <!-- Imagen Banner Debajo del Texto -->
-            <div class="mt-12 md:mt-16 rounded-2xl overflow-hidden shadow-2xl border-4 border-white transform hover:scale-[1.01] transition-transform duration-500">
-                <img class="w-full object-cover" src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1764782484/editable_cuadernillo_wt80a1.png" alt="Estudiantes UCA estudiando">
+            <div class="mt-16 relative mx-auto max-w-4xl">
+                <div class="absolute inset-0 bg-uca-gold transform rotate-1 rounded-3xl opacity-20 translate-y-4"></div>
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white transform hover:scale-[1.01] transition-transform duration-500">
+                    <img class="w-full object-cover" src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1764782484/editable_cuadernillo_wt80a1.png" alt="Estudiantes UCA estudiando">
+                </div>
             </div>
-
         </div>
     </header>
 
-    <!-- Main Content (Knowledge Base for AI) -->
-    <!-- Agregamos ID 'knowledge-base' para que la IA sepa qué leer -->
-    <section id="knowledge-base" class="py-16 bg-white">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-lg text-gray-600 leading-relaxed space-y-8">
-            
-            <div class="border-l-4 border-uca-gold pl-6 italic text-2xl text-uca-dark font-serif font-medium my-10">
-                "Hacer esto bien desde el principio es como quitarte de encima una mochila pesada: te da paz y libertad."
+    <!-- Wave Separator 1 -->
+    <div class="w-full overflow-hidden leading-[0]">
+        <svg class="relative block w-[calc(100%+1.3px)] h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-white"></path>
+        </svg>
+    </div>
+
+    <!-- Main Content -->
+    <section id="knowledge-base" class="py-12 bg-gray-50 relative">
+        <div class="max-w-3xl mx-auto px-6 lg:px-8">
+            <div class="bg-white p-8 rounded-3xl shadow-soft border border-gray-100 mb-12 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-2 h-full bg-uca-gold"></div>
+                <i class="fa-solid fa-quote-left text-uca-gold/10 text-6xl absolute top-4 left-6 z-0"></i>
+                <p class="relative z-10 text-2xl text-uca-dark font-semibold italic text-center leading-relaxed">
+                    "Hacer esto bien desde el principio es como quitarte de encima una mochila pesada: te da <span class="text-uca-gold">paz y libertad</span>."
+                </p>
             </div>
 
-            <p>
-                Si te faltan <strong class="text-uca-dark">horas sociales internas</strong> o necesitas mejorar tus calificaciones, entonces <span class="text-uca-gold font-bold">Círculos de Estudio</span> te será de ayuda. Es útil para todos los estudiantes, pero <strong>muy importante si eres de primer o segundo año</strong>.
-            </p>
+            <div class="space-y-8 text-lg text-gray-600 readable-text">
+                <p>Si te faltan <strong class="text-uca-dark">horas sociales internas</strong> o necesitas mejorar tus calificaciones, entonces <span class="font-bold text-uca-gold">Círculos de Estudio</span> es tu lugar. Es útil para todos, pero <span class="highlight">vital si eres de primer o segundo año</span>.</p>
+                <p>Para graduarse nadie puede llegar con calificaciones bajas o sin haber completado las horas. <strong class="text-uca-dark">Evitar estas situaciones es justo lo que te ofrece la UCA con este programa.</strong></p>
+            </div>
 
-            <p>
-                Como sabes, las calificaciones y horas sociales son relevantes en la universidad. Te da la libertad de disponer de tu tiempo al final de la carrera — no es poca cosa. Más importante aún: <strong>te da la satisfacción de que has hecho todo bien.</strong>
-            </p>
-
-            <p>
-                Mencionamos esto, porque para graduarse nadie puede llegar con calificaciones bajas o sin haber completado las horas. Desde el primer ciclo hay que hacerlo correctamente. Quienes no lo han hecho te contarán que se vuelve pesado y estresante. 
-                <span class="bg-uca-gold/20 px-1 rounded text-uca-dark font-semibold">Evitar estas situaciones es justo lo que te ofrece la UCA con este programa.</span>
-            </p>
-
-            <!-- Social Proof Bar -->
-            <div class="bg-uca-dark text-white rounded-2xl p-8 my-10 shadow-lg text-center transform hover:-translate-y-1 transition-transform duration-300">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-700">
-                    <div class="pb-4 md:pb-0">
-                        <div class="text-5xl font-extrabold text-uca-gold mb-2">+11,500</div>
-                        <div class="text-sm uppercase tracking-wider font-semibold opacity-80">Inscripciones</div>
-                    </div>
-                    <div class="pt-4 md:pt-0">
-                        <div class="text-5xl font-extrabold text-uca-gold mb-2">90%</div>
-                        <div class="text-sm uppercase tracking-wider font-semibold opacity-80">Satisfacción Superior</div>
-                    </div>
+            <div class="grid grid-cols-2 gap-4 mt-12 mb-16">
+                <div class="bg-uca-dark text-white rounded-3xl p-6 text-center transform hover:-translate-y-1 transition-transform">
+                    <div class="text-4xl lg:text-5xl font-black text-uca-gold mb-1 counter">+11k</div>
+                    <div class="text-xs lg:text-sm font-bold opacity-80 uppercase tracking-widest">Inscripciones</div>
                 </div>
-                <p class="mt-6 text-gray-400 text-sm font-light">Un programa premiado dentro y fuera del país.</p>
+                <div class="bg-white text-uca-dark border border-gray-200 rounded-3xl p-6 text-center transform hover:-translate-y-1 transition-transform shadow-sm">
+                    <div class="text-4xl lg:text-5xl font-black text-uca-gold mb-1">90%</div>
+                    <div class="text-xs lg:text-sm font-bold opacity-60 uppercase tracking-widest">Satisfacción</div>
+                </div>
             </div>
 
-            <div class="space-y-6">
-                <h3 class="text-2xl font-bold text-uca-dark border-b pb-2">¿Quiénes NO pueden unirse?</h3>
-                <p>Abajo te diremos qué debes hacer para inscribirte, pero antes veamos en qué casos NO puedes unirte:</p>
-                <ul class="space-y-4 bg-red-50 p-6 rounded-xl border border-red-100">
-                    <li class="flex items-start">
-                        <i class="fa-solid fa-circle-xmark text-red-500 mt-1.5 mr-3 text-xl"></i>
-                        <span>Si eres estudiante inactivo o externo a la UCA.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fa-solid fa-circle-xmark text-red-500 mt-1.5 mr-3 text-xl"></i>
-                        <span>Si no cumples con los requisitos (están entre los botones de abajo).</span>
-                    </li>
+            <div class="bg-red-50 rounded-3xl p-8 border border-red-100 mb-12">
+                <h3 class="text-xl font-bold text-red-800 mb-4 flex items-center"><i class="fa-solid fa-circle-exclamation mr-2"></i> Importante: No podrás unirte si...</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center text-red-700"><span class="w-2 h-2 bg-red-400 rounded-full mr-3"></span> Eres estudiante inactivo o externo a la UCA.</li>
+                    <li class="flex items-center text-red-700"><span class="w-2 h-2 bg-red-400 rounded-full mr-3"></span> No cumples con los requisitos.</li>
                 </ul>
             </div>
 
-            <div class="bg-green-50 border border-green-200 rounded-xl p-8 mt-12 flex flex-col md:flex-row items-center justify-between shadow-sm">
+            <div class="flex items-center justify-between bg-white border border-green-100 rounded-3xl p-8 shadow-sm">
                 <div>
-                    <h4 class="text-xl font-bold text-green-800">¿Cuánto tengo que pagar para unirme?</h4>
-                    <p class="text-green-700 mt-2">Círculos de Estudio es gratuito y exclusivo para los estudiantes UCA.</p>
+                    <h4 class="text-xl font-bold text-gray-800">Costo de inscripción</h4>
+                    <p class="text-green-600 font-medium">Beneficio exclusivo UCA</p>
                 </div>
-                <div class="text-6xl font-extrabold text-green-600 mt-6 md:mt-0 ml-0 md:ml-6">$0</div>
+                <div class="text-5xl font-black text-green-500 tracking-tighter">$0</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave Separator 2 -->
+    <div class="w-full overflow-hidden leading-[0] bg-gray-50">
+        <svg class="relative block w-[calc(100%+1.3px)] h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="fill-white"></path>
+        </svg>
+    </div>
+
+    <!-- Cards Section -->
+    <section id="cards-section" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-uca-gold font-bold uppercase tracking-wider text-sm mb-2 block">Tu próximo paso</span>
+                <h2 class="text-4xl font-black text-uca-dark">Elige tu camino</h2>
+                <div class="w-20 h-1 bg-uca-gold mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+                <!-- Tutor Card -->
+                <div onclick="toggleModal('modal-tutor')" class="group cursor-pointer rounded-[2rem] bg-white border border-gray-100 shadow-xl hover:shadow-2xl hover:border-uca-gold/30 transition-all duration-300 transform hover:-translate-y-2 overflow-hidden flex flex-col h-full relative">
+                    <div class="h-64 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-uca-dark/20 group-hover:bg-transparent transition-colors z-10"></div>
+                        <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754698413/la_tutora_arxqmk.png" alt="Tutor UCA" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 z-20"><span class="bg-white/90 backdrop-blur text-uca-dark text-xs font-bold px-4 py-2 rounded-full shadow-sm flex items-center gap-2"><i class="fa-solid fa-clock text-uca-gold"></i>Ganar mis horas Sociales</span></div>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col relative">
+                        <div class="absolute -top-10 right-8 w-16 h-16 bg-uca-gold rounded-2xl flex items-center justify-center text-uca-dark text-2xl shadow-lg transform rotate-3 group-hover:rotate-12 transition-transform"><i class="fa-solid fa-chalkboard-user"></i></div>
+                        <h3 class="text-2xl font-bold text-uca-dark mb-3">Ser Tutor</h3>
+                        <p class="text-gray-500 leading-relaxed mb-6">Comparte lo que sabes. Ideal si buscas completar tus horas en un ambiente donde harás amigos.</p>
+                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between text-uca-gold font-bold"><span>Ver detalles</span><i class="fa-solid fa-arrow-right transform group-hover:translate-x-2 transition-transform"></i></div>
+                    </div>
+                </div>
+
+                <!-- Tutorado Card -->
+                <div onclick="toggleModal('modal-tutorado')" class="group cursor-pointer rounded-[2rem] bg-white border border-gray-100 shadow-xl hover:shadow-2xl hover:border-uca-gold/30 transition-all duration-300 transform hover:-translate-y-2 overflow-hidden flex flex-col h-full relative">
+                    <div class="h-64 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-uca-dark/20 group-hover:bg-transparent transition-colors z-10"></div>
+                        <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754698413/img_1_ikqup2.png" alt="Tutorado UCA" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 z-20"><span class="bg-white/90 backdrop-blur text-uca-dark text-xs font-bold px-4 py-2 rounded-full shadow-sm flex items-center gap-2"><i class="fa-solid fa-star text-uca-gold"></i>Mejorar mis calificaciones</span></div>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col relative">
+                        <div class="absolute -top-10 right-8 w-16 h-16 bg-uca-dark rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg transform -rotate-3 group-hover:-rotate-12 transition-transform"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <h3 class="text-2xl font-bold text-uca-dark mb-3">Ser Tutorado</h3>
+                        <p class="text-gray-500 leading-relaxed mb-6">Recibe el apoyo que necesitas. Ideal si buscas mejorar tus notas y estudiar en grupo.</p>
+                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between text-uca-dark font-bold group-hover:text-uca-gold transition-colors"><span>Ver detalles</span><i class="fa-solid fa-arrow-right transform group-hover:translate-x-2 transition-transform"></i></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- AI Assistant Section -->
-    <section class="py-16 bg-gradient-to-br from-gray-50 to-gray-100 border-y border-gray-200">
+    <section class="py-16 bg-uca-lightgold/30">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
-                <div class="bg-uca-dark p-6 sm:p-8 text-white relative overflow-hidden">
-                    <div class="absolute -right-10 -top-10 text-white/5 text-9xl">
-                        <i class="fa-solid fa-robot"></i>
-                    </div>
-                    <div class="relative z-10">
-                        <h2 class="text-2xl font-bold flex items-center gap-3">
-                            <i class="fa-solid fa-sparkles text-uca-gold"></i>
-                            Asistente Virtual Círculos
-                        </h2>
-                        <p class="text-gray-300 mt-2">¿Tienes dudas sobre el programa? Pregúntame y responderé basándome en la información oficial de esta página.</p>
-                    </div>
-                </div>
-                
-                <div class="p-6 sm:p-8 bg-white">
-                    <div class="flex flex-col gap-4">
-                        <div class="relative">
-                            <input type="text" id="ai-question" placeholder="Ej: ¿Cuáles son los requisitos para ser tutor?" 
-                                class="w-full pl-4 pr-12 py-4 border-2 border-gray-200 rounded-xl text-lg focus:border-uca-gold focus:ring-0 outline-none transition-colors"
-                                onkeypress="handleEnter(event)">
-                            <button onclick="askAI()" id="btn-ask" class="absolute right-2 top-2 bottom-2 bg-uca-gold text-uca-dark hover:bg-yellow-400 font-bold px-6 rounded-lg transition-colors flex items-center justify-center">
-                                <i class="fa-solid fa-paper-plane"></i>
-                            </button>
-                        </div>
-                        
-                        <div id="ai-response-container" class="hidden">
-                            <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
-                                <div class="flex gap-3">
-                                    <div class="shrink-0 mt-1">
-                                        <div class="w-8 h-8 rounded-full bg-uca-gold flex items-center justify-center text-uca-dark font-bold text-xs">AI</div>
-                                    </div>
-                                    <div id="ai-response-text" class="text-gray-700 leading-relaxed text-lg">
-                                        <!-- Response will appear here -->
-                                    </div>
-                                </div>
-                            </div>
+            <div class="bg-white rounded-[2rem] shadow-soft overflow-hidden border border-white">
+                <div class="p-8 md:p-10">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-uca-gold to-yellow-300 flex items-center justify-center text-white text-xl shadow-md"><i class="fa-solid fa-sparkles"></i></div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-uca-dark">Asistente Virtual</h2>
+                            <p class="text-gray-500 text-sm">Resuelve tus dudas al instante</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Cards Section -->
-    <section id="cards-section" class="py-20 bg-gray-100 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-extrabold text-uca-dark sm:text-4xl">Elige tu rol en el programa</h2>
-                <p class="mt-4 text-xl text-gray-500">¿Buscas horas sociales o mejorar tus notas?</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 max-w-5xl mx-auto">
-                <!-- Tutor Card -->
-                <div onclick="toggleModal('modal-tutor')" class="group cursor-pointer bg-white rounded-2xl shadow-card hover:shadow-2xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300 flex flex-col h-full border border-gray-100">
-                    <div class="relative h-72 overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10"></div>
-                        <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754698413/la_tutora_arxqmk.png" alt="Tutor UCA" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute bottom-0 left-0 p-8 z-20 w-full">
-                            <div class="flex justify-between items-end">
-                                <div>
-                                    <span class="bg-uca-gold text-uca-dark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block shadow-sm">Horas Sociales</span>
-                                    <h3 class="text-3xl font-bold text-white shadow-black drop-shadow-lg">Ser Tutor</h3>
-                                </div>
-                                <i class="fa-solid fa-circle-arrow-right text-white/80 text-4xl group-hover:text-uca-gold transition-colors"></i>
-                            </div>
+                    <div class="relative group">
+                        <input type="text" id="ai-question" placeholder="Escribe tu duda aquí (ej: ¿Cómo me inscribo?)" class="w-full pl-6 pr-14 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-lg focus:bg-white focus:border-uca-gold focus:ring-4 focus:ring-uca-gold/10 outline-none transition-all placeholder-gray-400" onkeypress="handleEnter(event)">
+                        <button onclick="askAI()" id="btn-ask" class="absolute right-2 top-2 bottom-2 bg-white hover:bg-uca-gold hover:text-white text-uca-gold border border-gray-100 hover:border-transparent rounded-xl w-12 flex items-center justify-center transition-all shadow-sm"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                    <div id="ai-response-container" class="hidden mt-6 animate-float" style="animation-duration: 3s;">
+                        <div class="bg-uca-dark text-white rounded-2xl rounded-tl-none p-6 shadow-lg relative">
+                            <div class="absolute -top-2 -left-2 w-4 h-4 bg-uca-dark transform rotate-45"></div>
+                            <div class="flex gap-4"><div id="ai-response-text" class="text-gray-100 leading-relaxed"></div></div>
                         </div>
-                    </div>
-                    <div class="p-8 flex-1 flex flex-col justify-between bg-white relative">
-                        <p class="text-gray-600 text-lg leading-relaxed mb-6">Si buscas horas sociales en un ambiente bueno para hacer amigos y amigas.</p>
-                        <span class="text-uca-dark font-bold underline decoration-uca-gold decoration-2 underline-offset-4 group-hover:text-uca-gold transition-colors">Ver información completa</span>
-                    </div>
-                </div>
-
-                <!-- Tutorado Card -->
-                <div onclick="toggleModal('modal-tutorado')" class="group cursor-pointer bg-white rounded-2xl shadow-card hover:shadow-2xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300 flex flex-col h-full border border-gray-100">
-                    <div class="relative h-72 overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10"></div>
-                        <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754698413/img_1_ikqup2.png" alt="Tutorado UCA" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute bottom-0 left-0 p-8 z-20 w-full">
-                            <div class="flex justify-between items-end">
-                                <div>
-                                    <span class="bg-white text-uca-dark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block shadow-sm">Calificaciones</span>
-                                    <h3 class="text-3xl font-bold text-white shadow-black drop-shadow-lg">Ser Tutorado</h3>
-                                </div>
-                                <i class="fa-solid fa-circle-arrow-right text-white/80 text-4xl group-hover:text-white transition-colors"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-8 flex-1 flex flex-col justify-between bg-white relative">
-                        <p class="text-gray-600 text-lg leading-relaxed mb-6">Si buscas mejores calificaciones en un ambiente bueno para hacer amigos y amigas.</p>
-                        <span class="text-uca-dark font-bold underline decoration-gray-300 decoration-2 underline-offset-4 group-hover:text-gray-500 transition-colors">Ver información completa</span>
                     </div>
                 </div>
             </div>
@@ -284,200 +246,82 @@
     </section>
 
     <!-- Final CTA -->
-    <section class="bg-uca-dark py-16 mt-auto">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold text-white mb-6">¿Listo para inscribirte?</h2>
-            <p class="text-gray-300 mb-10 text-lg">Si eres parte de los que siempre se unen al programa, inscríbete de una vez desde el Portal.</p>
-            <a href="https://portal.uca.edu.sv" target="_blank" class="inline-block bg-uca-gold text-uca-dark font-extrabold text-xl px-12 py-5 rounded-full shadow-lg hover:shadow-2xl hover:bg-white hover:scale-105 transition-all duration-300">
-                Ir al Portal de Estudiantes
-            </a>
-            <p class="mt-6 text-sm text-gray-500">P.D. Solo podrás unirte si el periodo de inscripción está activo.</p>
+    <section class="bg-uca-dark py-20 mt-auto relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#E6B61F 1px, transparent 1px); background-size: 30px 30px;"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-black text-white mb-6">¿Listo para ser parte?</h2>
+            <p class="text-gray-400 mb-10 text-lg">Únete a una de las comunidades más grandes de la universidad.</p>
+            <a href="https://portal.uca.edu.sv" target="_blank" class="inline-flex items-center gap-3 bg-uca-gold text-uca-dark font-black text-lg px-10 py-5 rounded-full shadow-[0_0_20px_rgba(230,182,31,0.4)] hover:shadow-[0_0_40px_rgba(230,182,31,0.6)] hover:scale-105 transition-all duration-300"><span>Ir al Portal de Estudiantes</span><i class="fa-solid fa-external-link-alt"></i></a>
+            <p class="mt-8 text-sm text-gray-500 font-medium bg-black/20 inline-block px-4 py-1 rounded-full border border-white/5"><i class="fa-solid fa-circle-info mr-2"></i> P.D. Solo podrás unirte si el periodo de inscripción está activo.</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black py-8 border-t border-gray-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="mb-4 md:mb-0">
-                <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1764782384/base_transparente_vnkesb.svg" alt="Logo" class="h-10 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-            </div>
-            <p class="text-gray-600 text-sm">© Círculos de Estudio - UCA</p>
+    <footer class="bg-black py-10 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="opacity-50 hover:opacity-100 transition-opacity duration-300"><img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1764782384/base_transparente_vnkesb.svg" alt="Logo" class="h-8 grayscale invert"></div>
+            <p class="text-gray-600 text-sm font-medium">© Círculos de Estudio - UCA</p>
         </div>
     </footer>
 
     <!-- MODALS -->
     <!-- Tutor Modal -->
-    <div id="modal-tutor" class="modal fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="toggleModal('modal-tutor')"></div>
-        <div class="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-3xl relative overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="h-40 bg-uca-dark relative flex items-center justify-center overflow-hidden shrink-0">
-                 <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754698413/la_tutora_arxqmk.png" class="absolute inset-0 w-full h-full object-cover opacity-30 blur-sm">
-                 <div class="absolute inset-0 bg-gradient-to-b from-transparent to-uca-dark/90"></div>
-                 <h2 class="text-4xl font-bold text-white relative z-10 px-4 text-center">Información para Tutores</h2>
-                 <button onclick="toggleModal('modal-tutor')" class="absolute top-4 right-4 text-white/70 hover:text-white hover:bg-white/10 rounded-full w-10 h-10 flex items-center justify-center transition-all z-20"><i class="fa-solid fa-xmark text-xl"></i></button>
+    <div id="modal-tutor" class="modal fixed inset-0 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-uca-dark/60 backdrop-blur-sm" onclick="toggleModal('modal-tutor')"></div>
+        <div class="modal-content bg-white rounded-3xl shadow-2xl w-full max-w-3xl relative overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="h-48 bg-uca-dark relative flex items-center justify-center overflow-hidden shrink-0">
+                 <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754698413/la_tutora_arxqmk.png" class="absolute inset-0 w-full h-full object-cover opacity-40">
+                 <div class="absolute inset-0 bg-gradient-to-t from-uca-dark to-transparent"></div>
+                 <h2 class="text-4xl font-black text-white relative z-10 px-4 text-center">Información para <span class="text-uca-gold">Tutores</span></h2>
+                 <button onclick="toggleModal('modal-tutor')" class="absolute top-4 right-4 bg-white/10 hover:bg-white text-white hover:text-uca-dark rounded-full w-10 h-10 flex items-center justify-center transition-all z-20"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            <div class="p-8 md:p-10 overflow-y-auto">
+            <div class="p-8 md:p-12 overflow-y-auto">
                 <div class="prose max-w-none text-gray-600">
-                    <h3 class="text-2xl font-bold text-uca-dark mb-4 flex items-center"><i class="fa-solid fa-chalkboard-user mr-3 text-uca-gold"></i>¿Por qué ser tutor?</h3>
-                    <p class="mb-6 text-lg">Al convertirte en tutor, no solo obtienes tus horas sociales, sino que refuerzas tus conocimientos al enseñar. Es la mejor manera de dominar una materia.</p>
-                    
-                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 mb-8">
-                        <h4 class="font-bold text-uca-dark mb-4 text-lg">Requisitos Indispensables:</h4>
-                        <ul class="space-y-3">
-                            <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i> Ser estudiante activo de la UCA.</li>
-                            <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i> Tener un CUM igual o mayor a 7.0.</li>
-                            <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i> Haber aprobado la materia a impartir con nota sobresaliente (generalmente 8.0 o más).</li>
-                            <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i> Disponibilidad de tiempo para las sesiones.</li>
+                    <p class="text-lg leading-relaxed mb-8">Al convertirte en tutor, no solo obtienes tus horas sociales, sino que refuerzas tus conocimientos al enseñar. Es la mejor manera de dominar una materia.</p>
+                    <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 mb-8">
+                        <h4 class="font-bold text-uca-dark mb-4 text-lg flex items-center gap-2"><i class="fa-solid fa-list-check text-uca-gold"></i> Requisitos:</h4>
+                        <ul class="space-y-4">
+                            <li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mt-1 mr-3 text-lg"></i> <span class="flex-1">Ser estudiante activo de la UCA.</span></li>
+                            <li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mt-1 mr-3 text-lg"></i> <span class="flex-1">Tener un CUM igual o mayor a 7.0.</span></li>
+                            <li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mt-1 mr-3 text-lg"></i> <span class="flex-1">Haber aprobado la materia a impartir con nota sobresaliente (8.0+).</span></li>
+                            <li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mt-1 mr-3 text-lg"></i> <span class="flex-1">Disponibilidad de tiempo.</span></li>
                         </ul>
                     </div>
-
-                    <div class="text-center">
-                        <a href="https://portal.uca.edu.sv" target="_blank" class="inline-block w-full md:w-auto bg-uca-dark text-white font-bold py-4 px-10 rounded-lg hover:bg-black transition-colors shadow-lg">Ir a Inscribirme al Portal</a>
-                    </div>
+                    <div class="text-center pt-4"><a href="https://portal.uca.edu.sv" target="_blank" class="inline-block w-full md:w-auto bg-uca-dark text-white font-bold py-4 px-12 rounded-full hover:shadow-lg hover:bg-black transition-all transform hover:-translate-y-1">Ir a Inscribirme al Portal</a></div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Tutorado Modal -->
-    <div id="modal-tutorado" class="modal fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="toggleModal('modal-tutorado')"></div>
-        <div class="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-3xl relative overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="h-40 bg-uca-gold relative flex items-center justify-center overflow-hidden shrink-0">
-                 <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754698413/img_1_ikqup2.png" class="absolute inset-0 w-full h-full object-cover opacity-30 blur-sm">
-                 <div class="absolute inset-0 bg-gradient-to-b from-transparent to-uca-gold/90"></div>
-                 <h2 class="text-4xl font-bold text-uca-dark relative z-10 px-4 text-center">Información para Tutorados</h2>
-                 <button onclick="toggleModal('modal-tutorado')" class="absolute top-4 right-4 text-uca-dark/70 hover:text-uca-dark hover:bg-black/5 rounded-full w-10 h-10 flex items-center justify-center transition-all z-20"><i class="fa-solid fa-xmark text-xl"></i></button>
+    <div id="modal-tutorado" class="modal fixed inset-0 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-uca-dark/60 backdrop-blur-sm" onclick="toggleModal('modal-tutorado')"></div>
+        <div class="modal-content bg-white rounded-3xl shadow-2xl w-full max-w-3xl relative overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="h-48 bg-uca-gold relative flex items-center justify-center overflow-hidden shrink-0">
+                 <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754698413/img_1_ikqup2.png" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-multiply">
+                 <div class="absolute inset-0 bg-gradient-to-t from-uca-gold to-transparent opacity-90"></div>
+                 <h2 class="text-4xl font-black text-uca-dark relative z-10 px-4 text-center">Información para <span class="text-white">Tutorados</span></h2>
+                 <button onclick="toggleModal('modal-tutorado')" class="absolute top-4 right-4 bg-black/10 hover:bg-white text-uca-dark hover:text-black rounded-full w-10 h-10 flex items-center justify-center transition-all z-20"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            <div class="p-8 md:p-10 overflow-y-auto">
+            <div class="p-8 md:p-12 overflow-y-auto">
                 <div class="prose max-w-none text-gray-600">
-                    <h3 class="text-2xl font-bold text-uca-dark mb-4 flex items-center"><i class="fa-solid fa-graduation-cap mr-3 text-uca-dark"></i>Mejora tus notas</h3>
-                    <p class="mb-6 text-lg">Si sientes que una materia se te dificulta, no esperes al final del ciclo. Los círculos de estudio son espacios de confianza donde un compañero te explicará "en tu idioma".</p>
-                    
-                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-8 rounded-r-xl">
-                        <p class="text-blue-800 font-medium text-lg mb-2">Ideal si:</p>
-                        <ul class="list-disc list-inside space-y-1 text-blue-700">
-                            <li>Eres estudiante de primer o segundo año.</li>
-                            <li>Necesitas prepararte para un parcial específico.</li>
-                            <li>Buscas un grupo de estudio comprometido.</li>
+                    <p class="text-lg leading-relaxed mb-8">Si sientes que una materia se te dificulta, no esperes al final del ciclo. Los círculos de estudio son espacios de confianza donde un compañero te explicará "en tu idioma".</p>
+                    <div class="bg-blue-50 border border-blue-100 p-8 mb-8 rounded-3xl">
+                        <h4 class="text-blue-900 font-bold text-lg mb-4 flex items-center gap-2"><i class="fa-solid fa-thumbs-up"></i> Ideal si:</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Eres estudiante de primer o segundo año.</li>
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Necesitas prepararte para un parcial.</li>
+                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Buscas un grupo de estudio.</li>
                         </ul>
                     </div>
-
-                    <p class="text-sm text-gray-500 mb-6 text-center italic">Nota: Los horarios dependen de la disponibilidad de los tutores inscritos cada ciclo.</p>
-
-                    <div class="text-center">
-                        <a href="https://portal.uca.edu.sv" target="_blank" class="inline-block w-full md:w-auto bg-uca-gold text-uca-dark font-bold py-4 px-10 rounded-lg hover:bg-yellow-400 transition-colors shadow-lg">Buscar Tutorías en el Portal</a>
-                    </div>
+                    <p class="text-sm text-gray-400 mb-8 text-center bg-gray-50 py-2 rounded-lg">Nota: Los horarios dependen de la disponibilidad de los tutores.</p>
+                    <div class="text-center pt-4"><a href="https://portal.uca.edu.sv" target="_blank" class="inline-block w-full md:w-auto bg-uca-gold text-uca-dark font-bold py-4 px-12 rounded-full hover:shadow-lg hover:bg-yellow-400 transition-all transform hover:-translate-y-1">Buscar Tutorías en el Portal</a></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // --- Gemini AI Logic (Contextual Q&A) ---
-        const apiKey = ""; // API Key
-
-        async function askAI() {
-            const input = document.getElementById('ai-question');
-            const question = input.value.trim();
-            const btn = document.getElementById('btn-ask');
-            const responseContainer = document.getElementById('ai-response-container');
-            const responseText = document.getElementById('ai-response-text');
-
-            if (!question) return;
-
-            // UI Loading State
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-            btn.disabled = true;
-            input.disabled = true;
-            responseContainer.classList.remove('hidden');
-            responseText.innerHTML = '<span class="text-gray-400 italic">Consultando la base de datos...</span>';
-
-            // 1. Extract Website Content (The "Grounding" Data)
-            // We specifically select text from relevant sections to avoid extracting menu items or footer noise if unnecessary.
-            const heroText = document.querySelector('header').innerText;
-            const mainText = document.getElementById('knowledge-base').innerText;
-            const tutorModalText = document.getElementById('modal-tutor').innerText; // Include modal info even if hidden
-            const tutoradoModalText = document.getElementById('modal-tutorado').innerText;
-
-            const siteContext = `
-                ${heroText}
-                ${mainText}
-                INFORMACIÓN TUTORES: ${tutorModalText}
-                INFORMACIÓN TUTORADOS: ${tutoradoModalText}
-            `;
-
-            // 2. Construct Prompt
-            const prompt = `
-                Actúa como un asistente virtual experto del programa "Círculos de Estudio" de la UCA.
-                Tu tarea es responder a la pregunta del usuario BASÁNDOTE ÚNICAMENTE en la siguiente información proporcionada del sitio web.
-                
-                INFORMACIÓN DEL SITIO WEB:
-                "${siteContext}"
-                
-                REGLAS:
-                1. Si la respuesta está en el texto, responde de forma amable, breve y directa.
-                2. Si la respuesta NO está en el texto proporcionado, responde educadamente: "Lo siento, esa información no está disponible en este sitio web." No inventes información.
-                3. Usa emojis ocasionalmente para ser amigable.
-
-                PREGUNTA DEL USUARIO: "${question}"
-            `;
-
-            try {
-                // 3. Call API
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-                const payload = { contents: [{ parts: [{ text: prompt }] }] };
-
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) throw new Error('Error en la API');
-
-                const data = await response.json();
-                const answer = data.candidates?.[0]?.content?.parts?.[0]?.text || "No pude generar una respuesta.";
-
-                // 4. Show Result
-                // Convert Markdown bold (**text**) to HTML bold (<b>text</b>) for better display
-                const formattedAnswer = answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                responseText.innerHTML = formattedAnswer;
-
-            } catch (error) {
-                console.error(error);
-                responseText.innerHTML = "Hubo un error al conectar con el asistente. Por favor intenta de nuevo.";
-            } finally {
-                // Reset UI
-                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>';
-                btn.disabled = false;
-                input.disabled = false;
-                input.focus();
-            }
-        }
-
-        function handleEnter(e) {
-            if (e.key === 'Enter') askAI();
-        }
-
-        // --- Modal Logic ---
-        function toggleModal(modalId) {
-            const modal = document.getElementById(modalId);
-            const body = document.body;
-            if (modal.classList.contains('active')) {
-                modal.classList.remove('active');
-                body.style.overflow = 'auto';
-            } else {
-                document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
-                modal.classList.add('active');
-                body.style.overflow = 'hidden';
-            }
-        }
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape") {
-                document.querySelectorAll('.modal').forEach(m => { m.classList.remove('active'); document.body.style.overflow = 'auto'; });
-            }
-        });
-    </script>
+    <!-- Script Principal (Externo) -->
+    <script src="script.js" defer></script>
 </body>
 </html>
