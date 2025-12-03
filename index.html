@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Círculos de Estudio | UCA</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754694223/favicon_le3p33.png">
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                    },
+                    colors: {
+                        uca: {
+                            gold: '#E6B61F',
+                            dark: '#2F343F',
+                            black: '#000000',
+                            white: '#FFFFFF',
+                            gray: '#f3f4f6'
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                        'card-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        /* Ajuste específico para Iframes en SharePoint: evitar scrollbars dobles */
+        body { 
+            overflow-x: hidden; 
+            background-color: #f9fafb; /* Coincidir con bg-gray-50 */
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #2F343F; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #E6B61F; }
+
+        /* Animaciones */
+        .modal {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+        }
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-uca-dark antialiased selection:bg-uca-gold selection:text-white pb-10">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-center h-20 items-center">
+                <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1764782384/base_transparente_vnkesb.svg" alt="Círculos de Estudio Logo" class="h-14 w-auto hover:scale-105 transition-transform duration-300">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 px-4 sm:px-6 lg:px-8 pt-10">
+                <main class="mt-10 mx-auto max-w-7xl sm:mt-12 md:mt-16 lg:mt-20 xl:mt-28">
+                    <div class="sm:text-center lg:text-left">
+                        <span class="inline-block py-1 px-3 rounded-full bg-uca-gold/10 text-uca-dark text-sm font-bold mb-4 tracking-wide border border-uca-gold/20">
+                            PROGRAMA OFICIAL UCA
+                        </span>
+                        <h1 class="text-4xl tracking-tight font-extrabold text-uca-dark sm:text-5xl md:text-6xl">
+                            <span class="block xl:inline">Te ayudamos con</span>
+                            <span class="block text-uca-gold xl:inline">tus calificaciones</span>
+                        </h1>
+                        <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 font-medium">
+                            Más de 14 años de experiencia mejorando el rendimiento académico y facilitando tus horas sociales.
+                        </p>
+                        <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                            <div class="rounded-md shadow">
+                                <a href="#cards-section" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-uca-dark hover:bg-black md:py-4 md:text-lg transition-colors duration-300">
+                                    Comenzar ahora
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-gray-50 flex items-center justify-center">
+            <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full opacity-90 hover:opacity-100 transition-opacity duration-500" src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1764782484/editable_cuadernillo_wt80a1.png" alt="Estudiantes">
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="py-16 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-lg text-gray-600 leading-relaxed space-y-6">
+            
+            <div class="border-l-4 border-uca-gold pl-6 italic text-xl text-uca-dark font-semibold">
+                "Hacer esto bien desde el principio es como quitarte de encima una mochila pesada: te da paz y libertad."
+            </div>
+
+            <p>
+                Si te faltan <strong class="text-uca-dark">horas sociales internas</strong> o necesitas mejorar tus calificaciones, entonces <span class="text-uca-gold font-bold">Círculos de Estudio</span> te será de ayuda. Es útil para todos los estudiantes, pero <strong>muy importante si eres de primer o segundo año</strong>.
+            </p>
+
+            <!-- Social Proof Bar -->
+            <div class="bg-uca-dark text-white rounded-2xl p-8 my-10 shadow-lg text-center transform hover:-translate-y-1 transition-transform duration-300">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="text-4xl font-extrabold text-uca-gold mb-2">+11,500</div>
+                        <div class="text-sm uppercase tracking-wider font-semibold">Inscripciones</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-extrabold text-uca-gold mb-2">90%</div>
+                        <div class="text-sm uppercase tracking-wider font-semibold">Satisfacción Superior</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-uca-dark mt-12 mb-4">¿Quiénes NO pueden unirse?</h3>
+            <ul class="space-y-3 mt-4">
+                <li class="flex items-start">
+                    <i class="fa-solid fa-circle-xmark text-red-500 mt-1 mr-3"></i>
+                    <span>Si eres estudiante inactivo o externo a la UCA.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fa-solid fa-circle-xmark text-red-500 mt-1 mr-3"></i>
+                    <span>Si no cumples con los requisitos específicos.</span>
+                </li>
+            </ul>
+
+            <div class="bg-green-50 border border-green-200 rounded-xl p-6 mt-8 flex flex-col md:flex-row items-center justify-between">
+                <div>
+                    <h4 class="text-xl font-bold text-green-800">¿Cuánto cuesta unirse?</h4>
+                    <p class="text-green-700 mt-1">Beneficio exclusivo para estudiantes UCA.</p>
+                </div>
+                <div class="text-5xl font-extrabold text-green-600 mt-4 md:mt-0">$0</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section id="cards-section" class="py-16 bg-gray-100 relative">
+        <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white to-gray-100"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-uca-dark sm:text-4xl">Elige tu camino</h2>
+                <p class="mt-4 text-xl text-gray-500">Haz clic en una tarjeta para ver más información.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Tutor Card -->
+                <div onclick="toggleModal('modal-tutor')" class="group cursor-pointer bg-white rounded-2xl shadow-card hover:shadow-card-hover overflow-hidden transform hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-uca-gold flex flex-col">
+                    <div class="relative h-64 overflow-hidden">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
+                        <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754698413/la_tutora_arxqmk.png" alt="Tutor UCA" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute bottom-0 left-0 p-6 z-20">
+                            <span class="bg-uca-gold text-uca-dark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Horas Sociales</span>
+                            <h3 class="text-3xl font-bold text-white shadow-black drop-shadow-md">Ser Tutor</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col justify-between">
+                        <p class="text-gray-600 mb-6">Si buscas horas sociales y compartir tu conocimiento.</p>
+                        <button class="w-full bg-uca-dark text-white font-bold py-3 px-6 rounded-lg group-hover:bg-uca-gold group-hover:text-uca-dark transition-colors duration-300 flex justify-center items-center">
+                            Convertirme en Tutor
+                            <i class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tutorado Card -->
+                <div onclick="toggleModal('modal-tutorado')" class="group cursor-pointer bg-white rounded-2xl shadow-card hover:shadow-card-hover overflow-hidden transform hover:-translate-y-2 transition-all duration-300 border-2 border-transparent hover:border-uca-gold flex flex-col">
+                    <div class="relative h-64 overflow-hidden">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
+                        <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754698413/img_1_ikqup2.png" alt="Tutorado UCA" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute bottom-0 left-0 p-6 z-20">
+                            <span class="bg-uca-dark text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Calificaciones</span>
+                            <h3 class="text-3xl font-bold text-white shadow-black drop-shadow-md">Ser Tutorado</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col justify-between">
+                        <p class="text-gray-600 mb-6">Si buscas mejorar tus calificaciones y recibir apoyo.</p>
+                        <button class="w-full bg-gray-200 text-uca-dark font-bold py-3 px-6 rounded-lg group-hover:bg-uca-gold group-hover:text-uca-dark transition-colors duration-300 flex justify-center items-center">
+                            Convertirme en Tutorado
+                            <i class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="bg-uca-dark py-12">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold text-white mb-4">¿Ya sabes qué rol elegir?</h2>
+            <a href="https://portal.uca.edu.sv" target="_blank" class="inline-block bg-uca-gold text-uca-dark font-extrabold text-lg px-10 py-4 rounded-full shadow-lg hover:shadow-xl hover:bg-white hover:scale-105 transition-all duration-300">
+                Ir al Portal de Estudiantes
+            </a>
+            <p class="mt-4 text-sm text-gray-500">P.D. Solo podrás unirte si el periodo de inscripción está activo.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1764782384/base_transparente_vnkesb.svg" alt="Logo" class="h-10 opacity-70 grayscale">
+            </div>
+            <p class="text-gray-500 text-sm">© Círculos de Estudio - UCA</p>
+        </div>
+    </footer>
+
+    <!-- MODALS -->
+    <!-- Tutor Modal -->
+    <div id="modal-tutor" class="modal fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleModal('modal-tutor')"></div>
+        <div class="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-2xl relative overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="h-32 bg-uca-dark relative flex items-center justify-center overflow-hidden shrink-0">
+                 <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754698413/la_tutora_arxqmk.png" class="absolute inset-0 w-full h-full object-cover opacity-40">
+                 <h2 class="text-3xl font-bold text-white relative z-10">Información para Tutores</h2>
+                 <button onclick="toggleModal('modal-tutor')" class="absolute top-4 right-4 text-white hover:text-uca-gold text-2xl z-20"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-8 overflow-y-auto">
+                <h3 class="text-xl font-bold text-uca-gold mb-4">¿Por qué ser tutor?</h3>
+                <p class="text-gray-600 mb-6">Refuerzas conocimientos y obtienes horas sociales.</p>
+                <h4 class="font-bold text-uca-dark mb-2">Requisitos:</h4>
+                <ul class="list-disc list-inside space-y-2 text-gray-600 mb-6">
+                    <li>Estudiante activo UCA, CUM >= 7.0.</li>
+                    <li>Materia aprobada con nota sobresaliente.</li>
+                </ul>
+                <div class="bg-gray-100 p-4 rounded-lg text-center">
+                    <a href="https://portal.uca.edu.sv" target="_blank" class="block w-full bg-uca-dark text-white font-bold py-3 rounded hover:bg-black transition-colors">Ir a Inscribirme</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorado Modal -->
+    <div id="modal-tutorado" class="modal fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleModal('modal-tutorado')"></div>
+        <div class="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-2xl relative overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="h-32 bg-uca-gold relative flex items-center justify-center overflow-hidden shrink-0">
+                 <img src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1754698413/img_1_ikqup2.png" class="absolute inset-0 w-full h-full object-cover opacity-40">
+                 <h2 class="text-3xl font-bold text-uca-dark relative z-10">Información para Tutorados</h2>
+                 <button onclick="toggleModal('modal-tutorado')" class="absolute top-4 right-4 text-uca-dark hover:text-white text-2xl z-20"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-8 overflow-y-auto">
+                <h3 class="text-xl font-bold text-uca-dark mb-4">Mejora tus notas</h3>
+                <p class="text-gray-600 mb-6">Espacios de confianza donde un compañero te explicará "en tu idioma".</p>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6"><p class="text-blue-700 text-sm"><strong>Nota:</strong> Horarios dependen de tutores inscritos.</p></div>
+                <div class="bg-gray-100 p-4 rounded-lg text-center">
+                    <a href="https://portal.uca.edu.sv" target="_blank" class="block w-full bg-uca-gold text-uca-dark font-bold py-3 rounded hover:bg-yellow-400 transition-colors">Buscar Tutorías</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const body = document.body;
+            if (modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                body.style.overflow = 'auto';
+            } else {
+                document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+                modal.classList.add('active');
+                body.style.overflow = 'hidden';
+            }
+        }
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                document.querySelectorAll('.modal').forEach(m => { m.classList.remove('active'); document.body.style.overflow = 'auto'; });
+            }
+        });
+    </script>
+</body>
+</html>
