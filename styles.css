@@ -8,6 +8,16 @@ body {
     background-color: #ffffff;
 }
 
+.reading-column {
+    max-width: 72ch;
+    margin: 0 auto;
+}
+
+.reading-column p,
+.reading-column ul {
+    line-height: 1.75;
+}
+
 /* Tipografía mejorada para lectura */
 .readable-text {
     line-height: 1.8;
