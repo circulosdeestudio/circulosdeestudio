@@ -1,11 +1,10 @@
 // --- Gemini AI Logic ---
 // NOTA: En un entorno de producción real, evita exponer tu API Key directamente en el código frontend.
-// Para GitHub Pages, esta es la única forma rápida, pero considera usar un proxy o backend serverless si es posible.
-const apiKey = ""; 
+const apiKey = (window.GEMINI_API_KEY || document.querySelector('meta[name="gemini-api-key"]')?.content || "").trim();
 
 async function askAI() {
     const input = document.getElementById('ai-question');
-    const question = input.value.trim();
+    const question = input?.value.trim();
     const btn = document.getElementById('btn-ask');
     const responseContainer = document.getElementById('ai-response-container');
     const responseText = document.getElementById('ai-response-text');
@@ -19,15 +18,23 @@ async function askAI() {
     responseContainer.classList.remove('hidden');
     responseText.innerHTML = '<span class="opacity-70 italic">Escribiendo...</span>';
 
+    if (!apiKey) {
+        responseText.innerHTML = 'Configura la API key de Gemini para activar el asistente.';
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>';
+        btn.disabled = false;
+        input.disabled = false;
+        input.focus();
+        return;
+    }
+
     // Contexto del sitio para la IA
-    const heroText = document.querySelector('header').innerText;
-    const mainText = document.getElementById('knowledge-base').innerText;
-    const tutorModalText = document.getElementById('modal-tutor').innerText;
-    const tutoradoModalText = document.getElementById('modal-tutorado').innerText;
+    const heroText = document.querySelector('header')?.innerText || '';
+    const mainText = document.querySelector('[data-site-copy]')?.innerText || '';
+    const rolesText = document.getElementById('roles')?.innerText || '';
 
-    const siteContext = `${heroText} ${mainText} INFORMACIÓN TUTORES: ${tutorModalText} INFORMACIÓN TUTORADOS: ${tutoradoModalText}`;
+    const siteContext = `${heroText}\n${mainText}\n${rolesText}`;
 
-    const prompt = `Actúa como un asistente virtual muy amigable (nunca uses emojis) del programa "Círculos de Estudio" de la UCA. Responde BASÁNDOTE ÚNICAMENTE en: "${siteContext}". Pregunta: "${question}"`;
+    const prompt = `Actúa como un asistente virtual muy amigable (sin emojis) del programa "Círculos de Estudio" de la UCA. Responde únicamente usando este contexto: "${siteContext}". Pregunta: "${question}"`;
 
     try {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
