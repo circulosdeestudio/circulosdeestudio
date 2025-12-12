@@ -70,3 +70,7 @@ body {
 .modal.active .modal-content { 
     transform: scale(1) translateY(0); 
 }
+
+/* Carrusel de testimonios (tutores) */
+.tutor-slide { display: none; }
+.tutor-slide.active { display: block; }
