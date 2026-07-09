@@ -31,6 +31,7 @@ function initFloatingCta() {
     const floatingCta = document.querySelector('[data-floating-cta]');
     const heroMedia = document.querySelector('.home-hero-media');
     const finalCta = document.getElementById('cta-final');
+    const siteHeader = document.querySelector('[data-site-header]');
 
     if (!floatingCta || !heroMedia || !finalCta) return;
 
@@ -41,6 +42,7 @@ function initFloatingCta() {
         const shouldShow = hasPassedHeroMedia && !finalCtaVisible;
         floatingCta.classList.toggle('is-visible', shouldShow);
         floatingCta.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+        siteHeader?.classList.toggle('is-hidden', shouldShow);
     };
 
     const updateHeroPosition = () => {

@@ -8,13 +8,31 @@ body {
     font-size: 18px;
 }
 
+.site-header {
+    transform: translateY(0);
+}
+
+.site-header.is-hidden {
+    pointer-events: none;
+    transform: translateY(-100%);
+}
+
+.site-header-inner {
+    height: 5.6rem;
+}
+
+.site-header-logo {
+    height: 3.45rem;
+}
+
 .hero-surface {
     background:
         linear-gradient(180deg, rgba(255, 248, 225, 0.72) 0%, rgba(255, 255, 255, 0.96) 58%, #ffffff 100%);
 }
 
 .home-hero {
-    padding-bottom: 4.25rem;
+    padding-top: 8.2rem !important;
+    padding-bottom: 3.7rem;
 }
 
 .hero-title {
@@ -24,13 +42,26 @@ body {
 }
 
 .home-hero .hero-title {
-    max-width: 68rem;
-    font-size: clamp(2.65rem, 5.35vw, 4.95rem);
-    line-height: 1.08;
+    max-width: 64rem;
+    font-size: clamp(2.65rem, 4.9vw, 4.55rem);
+    line-height: 1.06;
+}
+
+.hero-pill {
+    margin-bottom: 1.55rem !important;
+}
+
+.hero-subtitle {
+    max-width: 49rem;
+    margin-top: 1.45rem !important;
+    color: #374151;
+    font-size: 1.28rem;
+    line-height: 1.55;
 }
 
 .home-hero-media {
     max-width: 58rem;
+    margin-top: 2.9rem !important;
 }
 
 .home-hero-glow {
@@ -49,6 +80,7 @@ body {
     font-weight: 700;
     line-height: 1.45;
     text-align: center;
+    text-transform: none;
 }
 
 .pulse-dot {
@@ -555,7 +587,8 @@ body {
     }
 
     .home-hero {
-        padding-bottom: 3rem;
+        padding-top: 7.6rem !important;
+        padding-bottom: 2.75rem;
     }
 
     .hero-title {
@@ -564,20 +597,28 @@ body {
     }
 
     .home-hero .hero-title {
-        font-size: 2.48rem;
-        line-height: 1.1;
+        font-size: 2.5rem;
+        line-height: 1.08;
     }
 
-    .home-hero p {
-        font-size: 1.22rem;
+    .hero-pill {
+        margin-bottom: 1.45rem !important;
+        padding: 0.52rem 0.95rem;
+    }
+
+    .home-hero .hero-subtitle {
+        max-width: 28rem;
+        margin-top: 1.35rem !important;
+        font-size: 1.24rem;
+        line-height: 1.5;
     }
 
     .home-hero-media {
-        margin-top: 2.5rem;
+        margin-top: 2.6rem !important;
     }
 
     .hero-image-caption {
-        padding: 0 0.25rem;
+        padding: 0 0.35rem;
         font-size: 0.9rem;
     }
 
