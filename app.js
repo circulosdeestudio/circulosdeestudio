@@ -1,28 +1,3 @@
-// Logica de modales para las tarjetas de roles
-function toggleModal(modalId) {
-    const modal = document.getElementById(modalId);
-    const body = document.body;
-
-    if (!modal) return;
-
-    if (modal.classList.contains('active')) {
-        modal.classList.remove('active');
-        body.style.overflow = 'auto';
-    } else {
-        document.querySelectorAll('.modal').forEach((m) => m.classList.remove('active'));
-        modal.classList.add('active');
-        body.style.overflow = 'hidden';
-    }
-}
-
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-        document.querySelectorAll('.modal').forEach((m) => m.classList.remove('active'));
-        document.body.style.overflow = 'auto';
-    }
-});
-
-// Carrusel infinito de testimonios (tutores)
 function initTutorCarousel() {
     const slides = Array.from(document.querySelectorAll('.tutor-slide'));
     if (!slides.length) return;
@@ -33,8 +8,13 @@ function initTutorCarousel() {
     const next = document.querySelector('.tutor-next');
 
     const show = (i) => {
-        slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
-        if (indicator) indicator.textContent = `${i + 1} / ${slides.length}`;
+        slides.forEach((slide, slideIndex) => {
+            slide.classList.toggle('active', slideIndex === i);
+        });
+
+        if (indicator) {
+            indicator.textContent = `${i + 1} / ${slides.length}`;
+        }
     };
 
     const go = (delta) => {
@@ -47,4 +27,45 @@ function initTutorCarousel() {
     next?.addEventListener('click', () => go(1));
 }
 
-document.addEventListener('DOMContentLoaded', initTutorCarousel);
+function initFloatingCta() {
+    const floatingCta = document.querySelector('[data-floating-cta]');
+    const heroMedia = document.querySelector('.home-hero-media');
+    const finalCta = document.getElementById('cta-final');
+
+    if (!floatingCta || !heroMedia || !finalCta) return;
+
+    let hasPassedHeroMedia = false;
+    let finalCtaVisible = false;
+
+    const update = () => {
+        const shouldShow = hasPassedHeroMedia && !finalCtaVisible;
+        floatingCta.classList.toggle('is-visible', shouldShow);
+        floatingCta.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+    };
+
+    const updateHeroPosition = () => {
+        hasPassedHeroMedia = heroMedia.getBoundingClientRect().bottom < 0;
+        update();
+    };
+
+    const finalObserver = new IntersectionObserver((entries) => {
+        finalCtaVisible = entries.some((entry) => entry.isIntersecting);
+        update();
+    }, {
+        threshold: 0.05,
+    });
+
+    finalObserver.observe(finalCta);
+    updateHeroPosition();
+    requestAnimationFrame(updateHeroPosition);
+    window.addEventListener('load', updateHeroPosition);
+    window.addEventListener('hashchange', updateHeroPosition);
+    window.addEventListener('scroll', updateHeroPosition, { passive: true });
+    window.addEventListener('resize', updateHeroPosition);
+    window.setTimeout(updateHeroPosition, 250);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initTutorCarousel();
+    initFloatingCta();
+});
