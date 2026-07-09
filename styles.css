@@ -49,6 +49,23 @@ body {
 
 .hero-pill {
     margin-bottom: 1.55rem !important;
+    border-color: rgba(47, 52, 63, 0.16) !important;
+    box-shadow: 0 12px 28px -24px rgba(47, 52, 63, 0.75) !important;
+}
+
+.hero-pill-icon {
+    display: inline-flex;
+    width: 1.45rem;
+    height: 1.45rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    color: #ffffff;
+    background: #2F343F;
+}
+
+.hero-pill-icon i {
+    font-size: 0.7rem;
 }
 
 .hero-subtitle {
@@ -73,6 +90,12 @@ body {
     box-shadow: 0 30px 70px -46px rgba(47, 52, 63, 0.65) !important;
 }
 
+.hero-image-frame picture,
+.hero-image-frame img {
+    display: block;
+    width: 100%;
+}
+
 .hero-image-caption {
     margin-top: 0.85rem;
     color: #6b7280;
@@ -81,22 +104,6 @@ body {
     line-height: 1.45;
     text-align: center;
     text-transform: none;
-}
-
-.pulse-dot {
-    animation: pulse-dot 1.6s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 0.48;
-        transform: scale(0.72);
-    }
 }
 
 .reading-column {
@@ -588,7 +595,7 @@ body {
 
     .home-hero {
         padding-top: 7.6rem !important;
-        padding-bottom: 2.75rem;
+        padding-bottom: 1.35rem;
     }
 
     .hero-title {
@@ -617,9 +624,22 @@ body {
         margin-top: 2.6rem !important;
     }
 
+    .hero-image-frame {
+        aspect-ratio: 4 / 5;
+    }
+
+    .hero-image-frame picture,
+    .hero-image-frame img {
+        height: 100%;
+    }
+
     .hero-image-caption {
         padding: 0 0.35rem;
         font-size: 0.9rem;
+    }
+
+    [data-site-copy] {
+        padding-top: 2.35rem !important;
     }
 
     .copy-marker {
@@ -633,7 +653,6 @@ body {
     .stat-callout {
         width: 6.35rem;
         height: 6.35rem;
-        margin-left: 0;
     }
 
     .stat-callout span {

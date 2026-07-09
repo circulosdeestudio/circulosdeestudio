@@ -36,7 +36,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css?v=20260709g">
+    <link rel="stylesheet" href="styles.css?v=20260709h">
 </head>
 <body class="text-gray-700 antialiased selection:bg-uca-gold selection:text-uca-dark flex flex-col min-h-screen bg-white">
 
@@ -53,7 +53,7 @@
 
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div class="hero-pill inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm mb-8">
-                <span class="h-2.5 w-2.5 rounded-full bg-[#003C71] pulse-dot"></span>
+                <span class="hero-pill-icon" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>
                 <span class="text-xs font-bold tracking-wide text-uca-dark uppercase">Programa oficial UCA</span>
             </div>
 
@@ -68,9 +68,12 @@
             <figure class="home-hero-media mt-14 relative mx-auto max-w-5xl">
                 <div class="home-hero-glow absolute inset-x-6 -bottom-5 h-12 rounded-[2rem] bg-uca-gold/20 blur-xl"></div>
                 <div class="hero-image-frame relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white transform hover:scale-[1.01] transition-transform duration-500">
-                    <img class="w-full object-cover" src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1764782484/editable_cuadernillo_wt80a1.png" alt="Estudiantes UCA estudiando">
+                    <picture>
+                        <source media="(max-width: 640px)" srcset="https://res.cloudinary.com/dc0ggmgm5/image/upload/c_fill,g_auto,w_900,h_1125,q_auto,f_auto/v1764782484/editable_cuadernillo_wt80a1.png">
+                        <img class="w-full object-cover" src="https://res.cloudinary.com/dc0ggmgm5/image/upload/v1764782484/editable_cuadernillo_wt80a1.png" alt="Estudiantes UCA estudiando">
+                    </picture>
                 </div>
-                <figcaption class="hero-image-caption">imagen con estudiantes que han formado parte del programa.</figcaption>
+                <figcaption class="hero-image-caption">Imagen de estudiantes que han formado parte del programa.</figcaption>
             </figure>
         </div>
     </header>
